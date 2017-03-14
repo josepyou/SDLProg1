@@ -31,10 +31,13 @@ void Player::handleInput()
 {
 	if(TheInputHandler::Instance()->joysticksInitialized())
 	{
-		//if(TheInputHandler::Instance()->getButtonState(0, 3))
-		//{
-		//	m_velocity.setX(1);
-		//}
+		if(TheInputHandler::Instance()->getButtonState(0, 3))
+		{
+			m_velocity.setX(1);
+		}
+
+		Vector2D* vec = TheInputHandler::Instance()->getMousePosition();
+		m_velocity = (*vec - m_position) / 100;
 
 		if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT))
 		{
