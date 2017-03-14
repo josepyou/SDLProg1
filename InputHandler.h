@@ -41,6 +41,8 @@ public:
 		return m_mouseButtonStates[buttonNumber];
 	}
 
+	bool isKeyDown(SDL_Scancode key);
+
 private:
 	InputHandler() 
 	{
@@ -55,6 +57,7 @@ private:
 	std::vector<std::pair<Vector2D*, Vector2D*> > m_joystickValues;
 	std::vector<std::vector<bool> > m_buttonStates;
 	std::vector<bool> m_mouseButtonStates;
+	Uint8 *m_keystates;
 
 	const int m_joystickDeadZone = 10000;
 
