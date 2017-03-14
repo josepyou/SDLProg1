@@ -1,3 +1,6 @@
+#ifndef __VECTOR2D_H__
+#define __VECTOR2D_H__
+
 #include <math.h>
 
 class Vector2D
@@ -79,3 +82,4 @@ private:
 	float m_y;
 };
 
+#endif // __VECTOR2D_H__
