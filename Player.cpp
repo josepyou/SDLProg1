@@ -31,6 +31,17 @@ void Player::handleInput()
 {
 	if(TheInputHandler::Instance()->joysticksInitialized())
 	{
+		//if(TheInputHandler::Instance()->getButtonState(0, 3))
+		//{
+		//	m_velocity.setX(1);
+		//}
+
+		if(TheInputHandler::Instance()->getMouseButtonState(LEFT))
+		{
+			m_velocity.setX(1);
+			
+		}
+
 		if(TheInputHandler::Instance()->xvalue(0, 1) > 0 ||
 			TheInputHandler::Instance()->xvalue(0, 1) < 0)
 		{
