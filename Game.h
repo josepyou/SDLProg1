@@ -7,6 +7,7 @@
 #include <vector>
 
 class GameObject;
+class GameStateMachine;
 
 class Game
 {
@@ -58,6 +59,8 @@ private:
 	GameObject *m_go;
 	GameObject *m_player;
 	GameObject *m_enemy;
+
+	GameStateMachine *m_pGameStateMachine;
 };
 
 typedef Game TheGame;

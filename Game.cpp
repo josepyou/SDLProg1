@@ -7,6 +7,10 @@
 #include "Enemy.h"
 #include "LoaderParams.h"
 #include "InputHandler.h"
+#include "GameStateMachine.h"
+#include "PlayState.h"
+#include "MenuState.h"
+
 
 Game* Game::s_pInstance = 0;
 
@@ -76,6 +80,9 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
 	TheInputHandler::Instance()->initializeJoysticks();
 
+	m_pGameStateMachine = new GameStateMachine();
+	m_pGameStateMachine->changeState(new MenuState());
+
 	return true;
 }
 
@@ -83,10 +90,12 @@ void Game::render()
 {
 	SDL_RenderClear(m_pRenderer);
 
-	for(std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++)
-	{
-		m_gameObjects[i]->draw();
-	}
+	m_pGameStateMachine->render();
+
+	// for(std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++)
+	// {
+	// 	m_gameObjects[i]->draw();
+	// }
 
 	SDL_RenderPresent(m_pRenderer);
 }
@@ -94,6 +103,11 @@ void Game::render()
 void Game::handleEvents()
 {
 	TheInputHandler::Instance()->update();
+
+	if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN))
+	{
+		m_pGameStateMachine->changeState(new PlayState());
+	}
 }
 
 void Game::clean()
@@ -108,10 +122,12 @@ void Game::clean()
 
 void Game::update()
 {
-	for(std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++)
-	{
-		m_gameObjects[i]->update();
-	}
+	m_pGameStateMachine->update();
+
+	// for(std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++)
+	// {
+	// 	m_gameObjects[i]->update();
+	// }
 }
 
 void Game::draw()
