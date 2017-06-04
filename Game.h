@@ -39,6 +39,8 @@ public:
 		return s_pInstance;
 	}
 
+	GameStateMachine* getStateMachine() { return m_pGameStateMachine; }
+
 private:
 	Game(){}
 
